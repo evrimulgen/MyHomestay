@@ -51,13 +51,13 @@ export default class ListRoom extends Component {
               GiaPhong: item.GiaPhong,
               latitude: this.props.navigation.state.params.latitude,
               longitude: this.props.navigation.state.params.longitude,
-              typeRoom: item.typeRoom,
+              typeRoom: item.LoaiPhong,
               })
             }}
             urlRoom = {'http://10.1.129.132/homestayapp/upload/details/'+ item.UrlHinh}
             nameRoom = {item.TenPhong}
             money = {item.GiaPhong}
-            typeRoom = {item.	LoaiPhong}
+            typeRoom = {item.LoaiPhong}
             item = {item}/>}
            numColumns={1}
            keyExtractor={item => item.idTT}

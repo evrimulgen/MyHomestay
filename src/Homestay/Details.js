@@ -104,7 +104,7 @@ export default class Details extends Component{
                             </View>
                             {/* --------------YOUTUBE------------------ */}
                             <YouTube
-                            videoId="Y29OrOVJUKs"   // The YouTube video ID
+                            videoId="YSSfaV1XrX0"   // The YouTube video ID
                             play={true}             // control playback of video with true/false
                             fullscreen={false}       // control whether the video should play in fullscreen or inline
                             loop={true}             // control whether the video should loop when ended
@@ -145,7 +145,7 @@ export default class Details extends Component{
                       <TouchableOpacity style={styles.numberPhone} onPress={()=>{this.props.navigation.navigate('_formInfo',{DiaChi:this.props.navigation.state.params.DiaChi,
                                                                                                                              DienThoai:this.props.navigation.state.params.DienThoai , 
                                                                                                                              GiaPhong:this.props.navigation.state.params.GiaPhong,
-                                                                                                                             TypeRoom:this.props.navigation.state.params.TypeRoom,
+                                                                                                                             TypeRoom:this.props.navigation.state.params.typeRoom,
                                                                                                                              idTT:this.props.navigation.state.params.idTT,
                                                                                                                              TenPhong:this.props.navigation.state.params.TenPhong  ,
                                                                                                                               })}}>
@@ -196,7 +196,7 @@ var styles = StyleSheet.create({
     container:{height: H*0.8},
         images:{height: H*0.3},
             img:{height: H * 0.3,width: W},
-        info:{height: H*0.5,alignItems:'center'},
+        info:{height: H*0.55,alignItems:'center'},
           infoCenter:{width:W *0.96,height: H*0.5},
             name:{height: H*0.05,marginTop: H*0.02,justifyContent:'center'},
             price:{height: H*0.05,justifyContent:'center'},

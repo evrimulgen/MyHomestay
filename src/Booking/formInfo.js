@@ -15,6 +15,12 @@ export default class formInfo extends Component {
           cmnd:'',
           datecome:'',
           dateleave:'',
+          slnguoi:'',
+          homestay:{
+            roomName:this.props.navigation.state.params.TenPhong,
+            typeRoom:this.props.navigation.state.params.TypeRoom  ,
+            money:this.props.navigation.state.params.GiaPhong
+          }
         },
         json_Info:'',
         object:''
@@ -102,36 +108,64 @@ _Obj(){
                             <TextInput
                             placeholder='Ngày nhận phòng' 
                             onChangeText={(text) => this.setState({info:{...this.state.info,datecome:text}})}
-                            value={this.state.info.cmnd}
+                            value={this.state.info.datecome}
                             />
                          </View>
                          <View style={{flex:1}}>
                          <TextInput
                          placeholder='Ngày trả phòng' 
                          onChangeText={(text) => this.setState({info:{...this.state.info,dateleave:text}})}
-                         value={this.state.info.cmnd}
+                         value={this.state.info.dateleave}
                          />
                       </View>
                     </View> 
                     <View style={styles.textinput} >
                     <TextInput
                          placeholder='Số lượng người' 
-                         onChangeText={(text) => this.setState({info:{...this.state.info,phonenumber:text}})}
-                         value={this.state.info.phonenumber}
+                         onChangeText={(text) => this.setState({info:{...this.state.info,slnguoi:text}})}
+                         value={this.state.info.slnguoi}
                          />
                     </View>
                     <View style={styles.reviewHomestay} >
-                      <View style={styles.reviewLeft} >
-                          <View style={{flex:1}}>
-                            <View>{this.props.navigation.state.params.idTT}</View>
+                      <View style= {{flexDirection:'row', justifyContent:'space-around'}}>
+                          <View style={{flex:1 ,marginLeft:W*0.03, marginTop:W*0.03}} >
+                              <Text>Phòng:</Text>
                           </View>
-                          <View style={{flex:1, borderBottomWidth:1,borderColor:'rgba(0,0,0,0.2)', borderTopWidth:1, marginLeft:W*0.04,marginRight:W*0.04}}></View>
-                          <View style={{flex:1}}></View>
+                          <View style={{flex:1,alignItems:'flex-end', marginTop:W*0.03,marginRight:W*0.02}}>
+                              <Text>{this.props.navigation.state.params.TenPhong}</Text>
+                          </View>
+                      </View>                    
+                      <View style= {{flexDirection:'row', justifyContent:'space-around'}}>
+                          <View style={{flex:1 ,marginLeft:W*0.03, marginTop:W*0.03}} >
+                              <Text>Loại phòng:</Text>
+                          </View>
+                          <View style={{flex:1,alignItems:'flex-end', marginTop:W*0.03,marginRight:W*0.02}}>
+                              <Text>{this.props.navigation.state.params.TypeRoom}</Text>
+                          </View>
                       </View>
-                      <View style={styles.reviewRight} >
-                          <View style={{flex:1}}></View>
-                          <View style={{flex:1, borderBottomWidth:1,borderColor:'rgba(0,0,0,0.2)', borderTopWidth:1, marginLeft:W*0.04,marginRight:W*0.04}}></View>
-                          <View style={{flex:1}}></View>
+                      <View style= {{flexDirection:'row', justifyContent:'space-around'}}>
+                          <View style={{flex:1 ,marginLeft:W*0.03, marginTop:W*0.03}} >
+                              <Text>Ngày nhân phòng:</Text>
+                          </View>
+                          <View style={{flex:1,alignItems:'flex-end', marginTop:W*0.03,marginRight:W*0.02}}>
+                              <Text>{this.state.info.datecome}</Text>
+                          </View>
+                      </View>
+                      <View style= {{flexDirection:'row', justifyContent:'space-around'}}>
+                          <View style={{flex:1 ,marginLeft:W*0.03, marginTop:W*0.03}} >
+                              <Text>Ngày trả phòng:</Text>
+                          </View>
+                          <View style={{flex:1,alignItems:'flex-end', marginTop:W*0.03,marginRight:W*0.02}}>
+                              <Text>{this.state.info.dateleave}</Text>
+                          </View>
+                      </View>
+                      <View style= {{flexDirection:'row', justifyContent:'space-around'}}>
+                          <View style={{flex:1 ,marginLeft:W*0.03, marginTop:W*0.03}} >
+                              <Text>Giá tiền:</Text>
+                          </View>
+                          <View style={{flex:1,alignItems:'flex-end', marginTop:W*0.03,marginRight:W*0.02}}>
+                              <Text>{this.props.navigation.state.params.GiaPhong}</Text>
+                          </View>
                       </View>
                     </View>  
                     <View style={styles.btnBooking}>       
@@ -193,7 +227,7 @@ var styles = StyleSheet.create({
 header_Right:{
   width:W*0.3
 },
-textinput:{
+ textinput:{
  //width:W*0.9,
  justifyContent:'space-around',
  paddingLeft:W*0.08,
@@ -229,7 +263,6 @@ reviewHomestay:{
  borderColor:'black',
  margin:W*0.01,
  borderRadius:5,
- flexDirection:'row'
 },
 reviewLeft:{
   flex:1,

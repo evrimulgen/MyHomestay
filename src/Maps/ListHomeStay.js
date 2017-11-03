@@ -53,7 +53,7 @@ export default class ListHomeStay extends Component {
             }}
             TenHS = {item.TenHS}
             DiaChi = {item.DiaChi}
-            urlHinh = {'http://10.1.129.132/homestayapp/upload/'+ item.UrlHinh}
+            urlHinh = {'http://10.1.121.155/homestayapp/upload/'+ item.UrlHinh}
            />}
            keyExtractor={item => item.idHS}
            numColumns={1}
@@ -66,7 +66,7 @@ export default class ListHomeStay extends Component {
     );
   }
   componentDidMount(){
-      fetch("http://10.1.129.132/homestayapp/homestay.php"
+      fetch("http://10.1.121.155/homestayapp/homestay.php"
         ,{
           method : "POST",
           headers:{
