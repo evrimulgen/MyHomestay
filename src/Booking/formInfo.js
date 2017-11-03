@@ -3,6 +3,9 @@ import {Platform,StyleSheet,Text,View,Dimensions,ScrollView,TextInput,Image,Pick
 , FlatList} from 'react-native';
 var W = Dimensions.get('window').width;
 var H = Dimensions.get('window').height;
+
+import Communications from 'react-native-communications';
+
 export default class formInfo extends Component {
   constructor(props){
     super(props);
@@ -51,6 +54,9 @@ _Obj(){
     object: obj,
   })
   
+  }
+  _senEmail(){
+    Communications.email(['nguyenductoann@gmai.com', 'thethoainguyenn@gmail.com'],'hello',null,'My Subject','My body text');
   }
   render() {
     return (

@@ -82,11 +82,13 @@ export default class Menu extends Component {
                     <View style={styles.iconMenu}>
                        <Image
                               style = {styles.icon}
-                              source={require('../images/map.png')}/>
+                              source={require('../images/search.png')}/>
                     </View>
+                    <TouchableOpacity onPress={this.props.navigation.navigate('_TienIch') } >
                     <View style={styles.txtMenu}>
-                      <Text style={{fontSize:H*0.025,marginLeft: W*0.02,color:'white'}}>Địa điểm ăn uống</Text>
+                      <Text style={{fontSize:H*0.025,marginLeft: W*0.02,color:'white'}}>Tìm kiếm tiện ích</Text>
                     </View>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.itemsMenu}>

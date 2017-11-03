@@ -16,7 +16,15 @@ import Menu from './Menu/Menu'
 import MapNavigate from './Maps/MapNavigate';
 import formInfo from './Booking/formInfo';
 import QR from './QRCode/QR';
+import TienIch from './Service/Restaurant';
+
 export const HomeStack = StackNavigator({
+    _Welcome: {
+        screen: Welcome,
+        navigationOptions: {
+            header: null
+        }
+    },
     _Home: {
         screen: Home,
         navigationOptions: {
@@ -53,12 +61,7 @@ export const HomeStack = StackNavigator({
             header: null
         }
     },
-    _Welcome: {
-        screen: Welcome,
-        navigationOptions: {
-            header: null
-        }
-    },
+    
     _MapNavigate: {
         screen: MapNavigate,
         navigationOptions: {
@@ -73,6 +76,12 @@ export const HomeStack = StackNavigator({
     },
     _QR: {
         screen: QR,
+        navigationOptions: {
+            header: null
+        }
+    },
+    _TienIch: {
+        screen: TienIch,
         navigationOptions: {
             header: null
         }
