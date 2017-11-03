@@ -92,7 +92,7 @@ export default class ListHomeStay extends Component {
     }
 }
 var styles = StyleSheet.create({
-  container: {flex:1},
+  container: {flex:1,backgroundColor:'white'},
   header:{
     height:H*0.1,
     flexDirection:'row',

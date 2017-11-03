@@ -51,6 +51,7 @@ export default class ListRoom extends Component {
               GiaPhong: item.GiaPhong,
               latitude: this.props.navigation.state.params.latitude,
               longitude: this.props.navigation.state.params.longitude,
+              typeRoom: item.typeRoom,
               })
             }}
             urlRoom = {'http://10.1.129.132/homestayapp/upload/details/'+ item.UrlHinh}
@@ -94,7 +95,7 @@ export default class ListRoom extends Component {
   }
 }
 var styles = StyleSheet.create({
-  container: {flex:1},
+  container: {flex:1,backgroundColor:'white'},
   header:{
     height:H*0.1,
     flexDirection:'row',

@@ -190,7 +190,7 @@ const styles = new StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         flexDirection:'row',
-    //    backgroundColor:'rgba(0,0,0,0.1)'
+       backgroundColor:'white',
         borderBottomWidth:0.5,
         borderColor:'black',
     },

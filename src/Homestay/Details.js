@@ -1,27 +1,39 @@
 import React, { Component } from 'react';
 import {
-  Platform,StyleSheet,Text,View,Dimensions,Image,Picker,TouchableOpacity,ScrollView
+  Platform,StyleSheet,Text,View,Dimensions,Image,Picker,TouchableOpacity,ScrollView,Alert
 } from 'react-native';
 var W = Dimensions.get('window').width;
 var H = Dimensions.get('window').height;
 import Swiper from 'react-native-swiper';
+
+// Thực Hiên Cuôc Gọi 
+import Communications from 'react-native-communications';
 import YouTube from 'react-native-youtube';
+
 var t;
-export default class Details extends Component<{}> {
+export default class Details extends Component{
   constructor(props){
     super(props);
     t = this;
     this.state = {
-            imgs : [],
-            isReady: false,
-            status: null,
-            quality: null,
-            error: null
+            imgs : []
     };
+  }
+  makeCall(){
+    Alert.alert(
+      'Thông Báo ',
+      'Bạn có muốn thực hiện cuộc gọi?',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () =>  Communications.phonecall(this.props.navigation.state.params.DienThoai, true)},
+      ],
+      { cancelable: false }
+    )
+   
   }
   render() {
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:1,backgroundColor:'white'}}>
             <View style={styles.header}>
                      <TouchableOpacity
                       onPress= {()=>{this.props.navigation.goBack()}}
@@ -52,7 +64,7 @@ export default class Details extends Component<{}> {
             </View>
             <ScrollView style={styles.container}>
                      <Swiper style={styles.images}
-                            //loop = {true}
+                            loop = {true}
                             autoplay = {true}
                             showsPagination = {false}
                             
@@ -90,10 +102,8 @@ export default class Details extends Component<{}> {
                               </TouchableOpacity>
                               </View>
                             </View>
-                           <View style={{justifyContent:'center',alignContent:'center'}}>
-                              <Text style={{color: 'gray',fontSize: H*0.02}}>Xem video phòng {this.props.navigation.state.params.TenPhong} >></Text>
-                            </View>
-                          <YouTube
+                            {/* --------------YOUTUBE------------------ */}
+                            <YouTube
                             videoId="Y29OrOVJUKs"   // The YouTube video ID
                             play={true}             // control playback of video with true/false
                             fullscreen={false}       // control whether the video should play in fullscreen or inline
@@ -107,6 +117,7 @@ export default class Details extends Component<{}> {
 
                             style={{height: H*0.3,width:W*0.96,marginTop:H*0.02}}
                           />
+
                         </View>
                      </View>
             </ScrollView>
@@ -118,8 +129,11 @@ export default class Details extends Component<{}> {
                             style = {styles.imgCall}
                             source={require('../images/call-filled-white.png')}/>
                       </View>
+                      
                       <View style={styles.numberPhone}>
-                        <Text style={{fontSize:H*0.025,color:'white'}}>{this.props.navigation.state.params.DienThoai}</Text>
+                        <TouchableOpacity onPress={() => this.makeCall()}>
+                             <Text style={{fontSize:H*0.025,color:'white'}}>{this.props.navigation.state.params.DienThoai}</Text>
+                        </TouchableOpacity>
                       </View>
                 </View>
                 <View style={styles.contactRight}>
@@ -128,9 +142,17 @@ export default class Details extends Component<{}> {
                             style = {styles.imgCall}
                             source={require('../images/reservation.png')}/>
                       </View>
-                      <View style={styles.numberPhone}>
-                        <Text style={{fontSize:H*0.025,color:'white'}}>Đặt phòng</Text>
-                      </View>
+                      <TouchableOpacity style={styles.numberPhone} onPress={()=>{this.props.navigation.navigate('_formInfo',{DiaChi:this.props.navigation.state.params.DiaChi,
+                                                                                                                             DienThoai:this.props.navigation.state.params.DienThoai , 
+                                                                                                                             GiaPhong:this.props.navigation.state.params.GiaPhong,
+                                                                                                                             TypeRoom:this.props.navigation.state.params.TypeRoom,
+                                                                                                                             idTT:this.props.navigation.state.params.idTT,
+                                                                                                                             TenPhong:this.props.navigation.state.params.TenPhong  ,
+                                                                                                                              })}}>
+                          <View >
+                            <Text style={{fontSize:H*0.025,color:'white'}}>Đặt phòng</Text>
+                          </View>
+                      </TouchableOpacity>
                 </View>
               </View>
             </View>
@@ -161,7 +183,7 @@ export default class Details extends Component<{}> {
 }
 
 var styles = StyleSheet.create({
-  wrapper: {flex:1},
+  wrapper: {flex:1,},
     header: {height: H*0.1,flexDirection: 'row'},
         HLeft:{width: W * 0.2, height: H*0.1,justifyContent:'center',alignItems:'center'},
              imgMenu: {width: W * 0.08, height: W * 0.08},
@@ -174,9 +196,8 @@ var styles = StyleSheet.create({
     container:{height: H*0.8},
         images:{height: H*0.3},
             img:{height: H * 0.3,width: W},
-        //info:{height: H*0.5,alignItems:'center'},
-          info:{height: H*0.56,alignItems:'center'},
-          infoCenter:{width:W *0.96},
+        info:{height: H*0.5,alignItems:'center'},
+          infoCenter:{width:W *0.96,height: H*0.5},
             name:{height: H*0.05,marginTop: H*0.02,justifyContent:'center'},
             price:{height: H*0.05,justifyContent:'center'},
             ad:{height: H*0.08,flexDirection:'row',},

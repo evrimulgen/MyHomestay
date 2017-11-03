@@ -14,7 +14,8 @@ import PanoramaRoom from './Homestay/PanoramaRoom'
 import Welcome from './Welcome/Welcome'
 import Menu from './Menu/Menu'
 import MapNavigate from './Maps/MapNavigate';
-
+import formInfo from './Booking/formInfo';
+import QR from './QRCode/QR';
 export const HomeStack = StackNavigator({
     _Home: {
         screen: Home,
@@ -60,6 +61,18 @@ export const HomeStack = StackNavigator({
     },
     _MapNavigate: {
         screen: MapNavigate,
+        navigationOptions: {
+            header: null
+        }
+    },
+     _formInfo: {
+        screen: formInfo,
+        navigationOptions: {
+            header: null
+        }
+    },
+    _QR: {
+        screen: QR,
         navigationOptions: {
             header: null
         }
