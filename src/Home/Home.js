@@ -28,19 +28,19 @@ export default class Home extends Component<{}> {
           <View style={styles.slide}>
             <Image
             style = {{width: W, height:H}}
-            source={require('../images/slide1.jpg')}
+            source={require('../images//1.png')}
           />
           </View>
            <View style={styles.slide}>
             <Image
             style = {{width: W, height:H}}
-            source={require('../images/slide1.jpg')}
+            source={require('../images/2.png')}
           />
           </View>
           <View style={styles.slide}>
             <Image
             style = {{width: W, height:H}}
-            source={require('../images/slide1.jpg')}
+            source={require('../images//3.png')}
           />
           </View>
         </Swiper>
@@ -81,7 +81,7 @@ export default class Home extends Component<{}> {
                     >
                       <Image
                         style = {styles.imghomeSearch}
-                        source={require('../images/homeSearch.png')}/>
+                        source={require('../images/search.png')}/>
                     </TouchableOpacity>
                 </View>
               </View>

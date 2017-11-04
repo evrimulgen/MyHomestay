@@ -15,7 +15,7 @@ export default class PanoramaRoom extends Component {
                 <View style={styles.webView}>
                     <WebView
                         startInLoadingState
-                        source={{uri: 'http://10.1.129.132/homestayapp/upload/pano/SocTiHon.jpg'}}
+                        source={{uri: 'http://10.1.129.132/homestayapp/upload/pano/HeoRungNhi.jpg'}}
                     />
                 </View>
                 <View style={styles.abs}>
@@ -38,7 +38,7 @@ export default class PanoramaRoom extends Component {
     }
 }
 const styles = new StyleSheet.create({
-      wrapper: {flex:1,backgroundColor:'#2ecc71'},
+      wrapper: {flex:1,backgroundColor:'white'},
         webView:{flex:1},
         abs:{flex:1, position: 'absolute'},
             header: {height: H*0.1,flexDirection:'row'},

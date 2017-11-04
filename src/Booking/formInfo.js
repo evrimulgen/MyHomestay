@@ -170,7 +170,7 @@ _Obj(){
                               <Text>Giá tiền:</Text>
                           </View>
                           <View style={{flex:1,alignItems:'flex-end', marginTop:W*0.03,marginRight:W*0.02}}>
-                              <Text>{this.props.navigation.state.params.GiaPhong}</Text>
+                              <Text>{this.props.navigation.state.params.GiaPhong.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")} VND</Text>
                           </View>
                       </View>
                     </View>  

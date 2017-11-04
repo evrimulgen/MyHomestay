@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Platform, StyleSheet, Text, View, Dimensions,Image,Alert,Picker} from 'react-native';
+import {Platform, StyleSheet, Text, View, Dimensions,Image,Alert,Picker,TouchableOpacity} from 'react-native';
 import MapView from 'react-native-maps';
 var W = Dimensions.get('window').width;
 var H = Dimensions.get('window').height;
@@ -45,13 +45,13 @@ export default class Restaurant extends Component{
 
         },
         service:[],
-        keyword:'',
+        keyword:'atm',
         address:''
         }
         t= this;
     }
 _getService(){
-        url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+this.state.initalRegion.latitude+','+this.state.initalRegion.longitude+'&radius=2000&type='+this.state.keyword+'&keyword='+this.state.keyword+'&key='+APIKEY
+        url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+this.state.initalRegion.latitude+','+this.state.initalRegion.longitude+'&radius=1000&type='+this.state.keyword+'&keyword='+this.state.keyword+'&key='+APIKEY
         fetch(url)
         .then(response => response.json())
         .then(responseJson => {
@@ -71,8 +71,8 @@ GPS(){
         var initalRegion = {
             latitude: lat,
             longitude: long ,
-            latitudeDelta:0.0922,
-            longitudeDelta: W/H,
+            latitudeDelta:0.0422,
+            longitudeDelta: W/(30*H),
         }
         this.setState({initalRegion:initalRegion});
         this.setState({makerPosition:initalRegion})
@@ -89,14 +89,15 @@ GPS(){
             var lastRegion = {
                 latitude: lat,
                 longitude: long,
-                latitudeDelta:0.0922,
-                longitudeDelta: W/H,
+                latitudeDelta:0.0422,
+                longitudeDelta: W/(30*H),
             }
             this.setState({initalRegion: lastRegion})
             this.setState({makerPosition:lastRegion})
             this.setState({origin:+lastRegion.latitude+','+lastRegion.longitude })
-           this._getService();
+            this._getService();
         })
+        
 }
 _selectedMarker(e){
     this.setState({
@@ -104,29 +105,38 @@ _selectedMarker(e){
     })
 }
     componentWillMount(){  
-  
+       
     }
     componentWillUnmount() {
       navigator.geolocation.clearWatch(this.watchID);
            }
 
 
-        
+_onPressMap(e){
+let  region = {
+    latitude:e.nativeEvent.coordinate.latitude,
+    longitude:  e.nativeEvent.coordinate.longitude,
+    latitudeDelta: 0.0422,
+    longitudeDelta: W/(30*H),
+}
+this.setState({initalRegion:region})
+}     
 
 componentDidMount(){  
   this.GPS();
+
  }
   render() {
     return (
         <View style={{flex:1}}>              
          <MapView 
                style={styles.map}
-               showsScale
                followUserLocation={true}
                showsUserLocation={true}
                showsCompass={true}
                showsBuildings
                showsTraffic
+          //     onRegionChange={this._onPressMap.bind(this)}
                cacheEnabled={true}
                showsScale
                region={this.state.initalRegion}
@@ -134,7 +144,7 @@ componentDidMount(){
                 mapType = "standard"           
             >
             {this.state.service.map(function(o,i){
-                console.log(o.vicinity)
+              //  console.log(o.vicinity)
               return(
             <MapView.Marker
                     key = {i}
@@ -145,20 +155,8 @@ componentDidMount(){
                     title={o.name}
                     description={o.MoTa}
                     image={uri=o.icon}
-                   // onPress ={()=>t.setState({address:o.vicinity})}
                     onPress ={()=>{t._selectedMarker(o.vicinity)}}
                     >
-                    {/* <MapView.Callout style={styles.calloutView}
-                        onPress={()=>{
-                          t._goToListRoom(o.idHS,o.TenHS,o.DienThoai,o.DiaChi,o.latitude,o.longitude)
-                      }}
-                    >
-                    
-                      <View style={styles.calloutViewCenter}>
-                        <Text>{o.TenHS}</Text>
-                      </View>
-
-                     </MapView.Callout> */}
             </MapView.Marker> 
                         )
                 })}
@@ -167,11 +165,11 @@ componentDidMount(){
         <View style={styles.Container} >
             <View style={styles.Distance} >
                 <View style={styles.Master}>
-                <View style={styles.DLeft}>
+                <TouchableOpacity onPress={()=>{this.props.navigation.goBack()}} style={styles.DLeft}>
                         <Image
                         style = {styles.imgMenu}
                         source={require('../images/back.png')}/>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.DistanceCenter}>
                         <Picker
                         style={{flex:1}}
@@ -218,7 +216,7 @@ const styles= StyleSheet.create({
       justifyContent:'center'
     },
     absContainer:{height: H*0.7},
-    footer:{flexDirection:'row',justifyContent:'flex-start',alignItems:'center' ,height: H*0.08,backgroundColor:'rgba(255,255,255,0.8)',margin:W*0.1,borderRadius:3},
+    footer:{flexDirection:'row',justifyContent:'flex-start',alignItems:'center' ,height: H*0.08,backgroundColor:'rgba(255,255,255,0.9)',margin:W*0.1,borderRadius:3},
     Master:{
         width: W,
         height:H*0.08,

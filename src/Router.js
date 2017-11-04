@@ -61,7 +61,7 @@ export const HomeStack = StackNavigator({
             header: null
         }
     },
-    
+  
     _MapNavigate: {
         screen: MapNavigate,
         navigationOptions: {

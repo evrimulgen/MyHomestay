@@ -1,21 +1,37 @@
 import React, { Component } from 'react';
 import {Platform,StyleSheet,Text,View,Dimensions,Image,Picker,TouchableOpacity
-, FlatList} from 'react-native';
+, FlatList,Alert} from 'react-native';
 var W = Dimensions.get('window').width;
 var H = Dimensions.get('window').height;
+// call number
+import Communications from 'react-native-communications';
 import { LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk';
 export default class Menu extends Component {
   constructor(props){
     super(props);
      this.state = {
-
+            nameTitle: 'TravelStay',
+            cover:''
         };
+  }
+  makeCall(){
+    Alert.alert(
+      'Thông Báo ',
+      'Bạn có muốn thực hiện cuộc gọi?',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () =>  Communications.phonecall('0962525359', true)},
+      ],
+      { cancelable: false }
+    )
+   
   }
   render() {
     return (
       <View style={styles.wrapper}>
           <View style={styles.header}>
-            <Text style={{color:'white'}}>Logo HomestayVN</Text>
+            {/* <Image source={{uri:this.state.cover} }/> */}
+            <Text style={{color:'white',fontSize:H*0.03}}>{this.state.nameTitle}</Text>
           </View>
           <View style={styles.container}>
 
@@ -59,13 +75,14 @@ export default class Menu extends Component {
                                           accessToken: accessToken,
                                           parameters: {
                                             fields: {
-                                              string: 'email,name,first_name,middle_name,last_name,birthday,mobile_phone'
+                                              string: 'email,name,first_name,middle_name,last_name,cover'
                                             }
                                           }
                                         },
                                         responseInfoCallback
                                       );
-                                      console.log('++++++++++',infoRequest)
+                                   //   this.setState({cover:infoRequest.cover.source})
+                                      console.log('++++++++++',infoRequest.cover.source)
                                       // Start the graph request.
                                       new GraphRequestManager().addRequest(infoRequest).start();
 
@@ -73,7 +90,7 @@ export default class Menu extends Component {
                                 }
                               }
                             }
-                      onLogoutFinished={() => alert("logout.")}/>
+                      onLogoutFinished={() => console.log("logout.")}/>
                     </View>
                   </View>
             </View>
@@ -84,10 +101,10 @@ export default class Menu extends Component {
                               style = {styles.icon}
                               source={require('../images/search.png')}/>
                     </View>
-                    <TouchableOpacity onPress={this.props.navigation.navigate('_TienIch') } >
-                    <View style={styles.txtMenu}>
+                    <TouchableOpacity
+                        onPress={()=>{this.props.navigation.navigate('_TienIch') }} 
+                        style={styles.txtMenu}>
                       <Text style={{fontSize:H*0.025,marginLeft: W*0.02,color:'white'}}>Tìm kiếm tiện ích</Text>
-                    </View>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -108,10 +125,12 @@ export default class Menu extends Component {
                     <View style={styles.iconMenu}>
                        <Image
                               style = {styles.icon}
-                              source={require('../images/map.png')}/>
+                              source={require('../images/call-filled-black.png')}/>
                     </View>
                     <View style={styles.txtMenu}>
-                      <Text style={{fontSize:H*0.025,marginLeft: W*0.02,color:'white'}}>Liên hệ</Text>
+                      <TouchableOpacity onPress={() => this.makeCall()}>
+                          <Text style={{fontSize:H*0.025,marginLeft: W*0.02,color:'white'}}>Liên hệ</Text>
+                      </TouchableOpacity>
                     </View>
                 </View>
             </View>
