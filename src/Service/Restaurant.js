@@ -14,6 +14,7 @@ export default class Restaurant extends Component{
   constructor(props){
     super(props);
      this.state = {
+         filter: <View></View>,
         initalRegion:{
                 latitude:0,
                 longitude:  0,
@@ -101,7 +102,13 @@ GPS(){
 }
 _selectedMarker(e){
     this.setState({
-        address:e
+        filter:
+                        <View style={styles.footer}>
+                        <Image
+                        source={require('../images/location.png')}
+                        />
+                        <Text style={{fontSize:W*0.028}} >{e}</Text>
+                    </View>
     })
 }
     componentWillMount(){  
@@ -188,12 +195,13 @@ componentDidMount(){
                 </View>
             </View>
             <View style={styles.absContainer}></View>
-            <View style={styles.footer}>
+            {this.state.filter}
+            {/* <View style={styles.footer}>
                <Image
                source={require('../images/location.png')}
                />
                <Text style={{fontSize:W*0.028}} >{this.state.address}</Text>
-            </View>
+            </View> */}
         </View>
     </View>
     );
